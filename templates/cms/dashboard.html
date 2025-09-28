@@ -1,0 +1,229 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Dashboard - {{ site_settings.site_title|default:"My CMS" }}{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1><i class="fas fa-tachometer-alt"></i> Dashboard</h1>
+    <div>
+        <a href="{% url 'cms:create_post' %}" class="btn btn-primary">
+            <i class="fas fa-plus"></i> New Post
+        </a>
+        <a href="{% url 'cms:create_page' %}" class="btn btn-success">
+            <i class="fas fa-file-alt"></i> New Page
+        </a>
+    </div>
+</div>
+
+<!-- Stats Cards -->
+<div class="row mb-4">
+    <div class="col-md-3 mb-3">
+        <div class="card bg-primary text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h4 class="mb-0">{{ total_posts }}</h4>
+                        <p class="mb-0">Total Posts</p>
+                    </div>
+                    <i class="fas fa-file-alt fa-2x opacity-75"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <div class="card bg-success text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h4 class="mb-0">{{ published_posts }}</h4>
+                        <p class="mb-0">Published</p>
+                    </div>
+                    <i class="fas fa-check-circle fa-2x opacity-75"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <div class="card bg-warning text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h4 class="mb-0">{{ draft_posts }}</h4>
+                        <p class="mb-0">Drafts</p>
+                    </div>
+                    <i class="fas fa-edit fa-2x opacity-75"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <div class="card bg-info text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h4 class="mb-0">{{ total_comments }}</h4>
+                        <p class="mb-0">Comments</p>
+                    </div>
+                    <i class="fas fa-comments fa-2x opacity-75"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Recent Posts -->
+    <div class="col-lg-8 mb-4">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0"><i class="fas fa-file-alt"></i> Recent Posts</h5>
+                <a href="{% url 'cms:create_post' %}" class="btn btn-sm btn-primary">
+                    <i class="fas fa-plus"></i> New Post
+                </a>
+            </div>
+            <div class="card-body">
+                {% if recent_posts %}
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for post in recent_posts %}
+                            <tr>
+                                <td>
+                                    <a href="{{ post.get_absolute_url }}" class="text-decoration-none">
+                                        {{ post.title|truncatechars:50 }}
+                                    </a>
+                                </td>
+                                <td>
+                                    {% if post.status == 'published' %}
+                                    <span class="badge bg-success">Published</span>
+                                    {% else %}
+                                    <span class="badge bg-warning">Draft</span>
+                                    {% endif %}
+                                </td>
+                                <td>{{ post.created_at|date:"M d, Y" }}</td>
+                                <td>
+                                    <a href="{% url 'cms:edit_post' post.slug %}" class="btn btn-sm btn-outline-primary">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="{{ post.get_absolute_url }}" class="btn btn-sm btn-outline-info">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <div class="text-center py-4">
+                    <i class="fas fa-file-alt fa-3x text-muted mb-3"></i>
+                    <h5>No posts yet</h5>
+                    <p class="text-muted">Create your first post to get started!</p>
+                    <a href="{% url 'cms:create_post' %}" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Create Post
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+    <!-- Recent Comments -->
+    <div class="col-lg-4 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-comments"></i> Recent Comments</h5>
+            </div>
+            <div class="card-body">
+                {% if recent_comments %}
+                {% for comment in recent_comments %}
+                <div class="mb-3 pb-3 {% if not forloop.last %}border-bottom{% endif %}">
+                    <h6 class="mb-1">{{ comment.name }}</h6>
+                    <p class="mb-1 small">{{ comment.content|truncatechars:80 }}</p>
+                    <small class="text-muted">
+                        on <a href="{{ comment.post.get_absolute_url }}" class="text-decoration-none">{{ comment.post.title|truncatechars:30 }}</a>
+                        <br>{{ comment.created_at|date:"M d, Y" }}
+                        {% if not comment.is_approved %}
+                        <span class="badge bg-warning ms-2">Pending</span>
+                        {% endif %}
+                    </small>
+                </div>
+                {% endfor %}
+                {% else %}
+                <div class="text-center py-3">
+                    <i class="fas fa-comments fa-2x text-muted mb-2"></i>
+                    <p class="text-muted">No comments yet</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <!-- Quick Stats -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-chart-bar"></i> Quick Stats</h5>
+            </div>
+            <div class="card-body">
+                <div class="row text-center">
+                    <div class="col-6 mb-3">
+                        <h4 class="text-primary">{{ total_categories }}</h4>
+                        <small class="text-muted">Categories</small>
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h4 class="text-success">{{ total_pages }}</h4>
+                        <small class="text-muted">Pages</small>
+                    </div>
+                    <div class="col-12">
+                        <h4 class="text-warning">{{ pending_comments }}</h4>
+                        <small class="text-muted">Pending Comments</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Actions -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-bolt"></i> Quick Actions</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3 mb-2">
+                        <a href="{% url 'cms:create_post' %}" class="btn btn-outline-primary w-100">
+                            <i class="fas fa-plus"></i> Create Post
+                        </a>
+                    </div>
+                    <div class="col-md-3 mb-2">
+                        <a href="{% url 'cms:create_page' %}" class="btn btn-outline-success w-100">
+                            <i class="fas fa-file-alt"></i> Create Page
+                        </a>
+                    </div>
+                    <div class="col-md-3 mb-2">
+                        <a href="/admin/cms/category/" class="btn btn-outline-info w-100">
+                            <i class="fas fa-folder"></i> Manage Categories
+                        </a>
+                    </div>
+                    <div class="col-md-3 mb-2">
+                        <a href="/admin/" class="btn btn-outline-secondary w-100">
+                            <i class="fas fa-cog"></i> Admin Panel
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

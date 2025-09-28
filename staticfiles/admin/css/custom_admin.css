@@ -1,0 +1,570 @@
+/* Custom AdminLTE Admin Styles */
+
+/* Override Django admin base styles */
+body.admin {
+    font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+/* Header styling */
+#header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    height: auto;
+    padding: 15px 20px;
+    border-bottom: 3px solid #5a67d8;
+}
+
+#branding h1 {
+    color: white;
+    font-weight: 300;
+    font-size: 24px;
+    margin: 0;
+}
+
+#branding h1 a {
+    color: white;
+    text-decoration: none;
+}
+
+#branding h1 a:hover {
+    color: #f8f9fa;
+}
+
+/* Navigation */
+#nav-global {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+#nav-global a {
+    color: white;
+    padding: 8px 15px;
+    border-radius: 3px;
+    transition: background-color 0.3s ease;
+}
+
+#nav-global a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    text-decoration: none;
+}
+
+/* User tools */
+#user-tools {
+    color: white;
+    float: right;
+    margin-top: 5px;
+}
+
+#user-tools a {
+    color: white;
+    margin-left: 15px;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    transition: background-color 0.3s ease;
+}
+
+#user-tools a:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Content area */
+#content {
+    margin: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 0;
+    overflow: hidden;
+}
+
+#content-main {
+    padding: 20px;
+}
+
+/* Breadcrumbs */
+.breadcrumbs {
+    background: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    padding: 15px 20px;
+    margin: 0;
+    font-size: 14px;
+}
+
+.breadcrumbs a {
+    color: #667eea;
+    text-decoration: none;
+}
+
+.breadcrumbs a:hover {
+    color: #5a67d8;
+    text-decoration: underline;
+}
+
+/* Cards and modules */
+.module {
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.module h2 {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 15px 20px;
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.module h3 {
+    background: #f8f9fa;
+    color: #495057;
+    padding: 12px 20px;
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+    border-bottom: 1px solid #dee2e6;
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+thead th {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 12px 15px;
+    font-weight: 500;
+    border: none;
+}
+
+tbody td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #dee2e6;
+    vertical-align: middle;
+}
+
+tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Forms */
+.form-row {
+    margin-bottom: 15px;
+}
+
+.form-row label {
+    font-weight: 500;
+    color: #495057;
+    margin-bottom: 5px;
+    display: block;
+}
+
+input[type="text"], 
+input[type="password"], 
+input[type="email"], 
+input[type="url"], 
+input[type="number"], 
+textarea, 
+select {
+    border: 2px solid #e9ecef;
+    border-radius: 6px;
+    padding: 10px 12px;
+    font-size: 14px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
+    max-width: 500px;
+}
+
+input:focus, 
+textarea:focus, 
+select:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+    outline: none;
+}
+
+/* Buttons */
+.default, 
+input[type="submit"], 
+.button, 
+button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.default:hover, 
+input[type="submit"]:hover, 
+.button:hover, 
+button:hover {
+    background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: white;
+    text-decoration: none;
+}
+
+.default:active, 
+input[type="submit"]:active, 
+.button:active, 
+button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Action buttons */
+.addlink {
+    background: #28a745;
+}
+
+.addlink:hover {
+    background: #218838;
+}
+
+.changelink {
+    background: #17a2b8;
+}
+
+.changelink:hover {
+    background: #138496;
+}
+
+.deletelink {
+    background: #dc3545;
+}
+
+.deletelink:hover {
+    background: #c82333;
+}
+
+/* Messages */
+.messagelist {
+    margin: 0 0 20px;
+    padding: 0;
+    list-style: none;
+}
+
+.messagelist li {
+    padding: 12px 20px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    border-left: 4px solid;
+}
+
+.messagelist .success {
+    background-color: #d4edda;
+    border-left-color: #28a745;
+    color: #155724;
+}
+
+.messagelist .warning {
+    background-color: #fff3cd;
+    border-left-color: #ffc107;
+    color: #856404;
+}
+
+.messagelist .error {
+    background-color: #f8d7da;
+    border-left-color: #dc3545;
+    color: #721c24;
+}
+
+.messagelist .info {
+    background-color: #d1ecf1;
+    border-left-color: #17a2b8;
+    color: #0c5460;
+}
+
+/* Pagination */
+.paginator {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.paginator a, 
+.paginator .this-page {
+    display: inline-block;
+    padding: 8px 12px;
+    margin: 0 2px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.paginator a {
+    background: #f8f9fa;
+    color: #667eea;
+    border: 1px solid #dee2e6;
+}
+
+.paginator a:hover {
+    background: #667eea;
+    color: white;
+    border-color: #667eea;
+}
+
+.paginator .this-page {
+    background: #667eea;
+    color: white;
+    border: 1px solid #667eea;
+}
+
+/* Filters */
+#changelist-filter {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+#changelist-filter h2 {
+    background: none;
+    color: #495057;
+    padding: 0 0 10px;
+    font-size: 16px;
+    font-weight: 500;
+    border-bottom: 2px solid #667eea;
+    margin-bottom: 15px;
+}
+
+#changelist-filter h3 {
+    background: none;
+    color: #6c757d;
+    padding: 0;
+    font-size: 14px;
+    font-weight: 500;
+    margin: 15px 0 8px;
+    border: none;
+}
+
+#changelist-filter ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+#changelist-filter li {
+    padding: 5px 0;
+}
+
+#changelist-filter a {
+    color: #667eea;
+    text-decoration: none;
+    padding: 3px 0;
+    display: block;
+    border-radius: 3px;
+    transition: color 0.3s ease;
+}
+
+#changelist-filter a:hover {
+    color: #5a67d8;
+    background: #f8f9fa;
+    padding-left: 5px;
+}
+
+#changelist-filter a.selected {
+    color: #495057;
+    font-weight: 500;
+}
+
+/* Search */
+#changelist-search {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+#searchbar {
+    border: 2px solid #e9ecef;
+    border-radius: 6px 0 0 6px;
+    padding: 10px 15px;
+    font-size: 14px;
+    width: 300px;
+    border-right: none;
+}
+
+#searchbar:focus {
+    border-color: #667eea;
+    box-shadow: none;
+    outline: none;
+}
+
+input[type="submit"].searchbar {
+    border: 2px solid #667eea;
+    background: #667eea;
+    border-radius: 0 6px 6px 0;
+    border-left: none;
+    color: white;
+    padding: 10px 20px;
+}
+
+input[type="submit"].searchbar:hover {
+    background: #5a67d8;
+    border-color: #5a67d8;
+}
+
+/* Actions dropdown */
+.actions {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    border: 1px solid #dee2e6;
+}
+
+.actions select {
+    margin-right: 10px;
+    padding: 8px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}
+
+.actions button {
+    padding: 8px 16px;
+    font-size: 13px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #content {
+        margin: 10px;
+    }
+    
+    .module h2 {
+        padding: 12px 15px;
+        font-size: 14px;
+    }
+    
+    #changelist-filter {
+        padding: 15px;
+    }
+    
+    #searchbar {
+        width: 200px;
+    }
+    
+    table {
+        font-size: 13px;
+    }
+    
+    thead th,
+    tbody td {
+        padding: 8px 10px;
+    }
+}
+
+/* Loading animation */
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Dashboard specific styles */
+.dashboard .module {
+    margin-bottom: 30px;
+}
+
+.dashboard .module table {
+    margin: 0;
+}
+
+.dashboard .module th {
+    font-size: 13px;
+    padding: 10px 15px;
+}
+
+.dashboard .module td {
+    font-size: 13px;
+    padding: 10px 15px;
+}
+
+/* Make the interface more modern */
+* {
+    box-sizing: border-box;
+}
+
+.selector-available,
+.selector-chosen {
+    border-radius: 6px;
+    border: 2px solid #e9ecef;
+}
+
+.selector-available:focus,
+.selector-chosen:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+
+.calendar,
+.calendarbox,
+.clockbox {
+    border-radius: 6px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.help {
+    color: #6c757d;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+/* Inline formsets */
+.inline-group {
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.inline-group .module h2 {
+    margin: 0;
+    padding: 15px 20px;
+}
+
+/* File inputs */
+input[type="file"] {
+    border: 2px dashed #dee2e6;
+    border-radius: 6px;
+    padding: 20px;
+    text-align: center;
+    transition: border-color 0.3s ease;
+}
+
+input[type="file"]:hover {
+    border-color: #667eea;
+}

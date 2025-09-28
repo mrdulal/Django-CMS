@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Create Post - {{ site_settings.site_title|default:"My CMS" }}{% endblock %}
+
+{% block extra_css %}
+<script src="//cdn.ckeditor.com/4.19.1/full/ckeditor.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1><i class="fas fa-plus"></i> Create New Post</h1>
+    <a href="{% url 'cms:dashboard' %}" class="btn btn-secondary">
+        <i class="fas fa-arrow-left"></i> Back to Dashboard
+    </a>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                {{ form|crispy }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Initialize CKEditor
+    CKEDITOR.replace('id_content', {
+        height: 400,
+        filebrowserUploadUrl: '/ckeditor/upload/',
+        filebrowserBrowseUrl: '/ckeditor/browse/',
+    });
+    
+    // Auto-generate slug from title
+    document.getElementById('id_title').addEventListener('input', function() {
+        const title = this.value;
+        const slug = title.toLowerCase()
+            .replace(/[^a-z0-9 -]/g, '')
+            .replace(/\s+/g, '-')
+            .replace(/-+/g, '-')
+            .trim('-');
+        document.getElementById('id_slug').value = slug;
+    });
+</script>
+{% endblock %}

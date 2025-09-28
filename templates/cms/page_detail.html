@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ page.title }} - {{ site_settings.site_title|default:"My CMS" }}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <article class="mb-4">
+            <!-- Page Header -->
+            <header class="mb-4">
+                <h1>{{ page.title }}</h1>
+                <div class="text-muted mb-3">
+                    <i class="fas fa-calendar"></i> Last updated: {{ page.updated_at|date:"F d, Y" }}
+                </div>
+                
+                {% if user.is_authenticated and user.is_staff %}
+                <div class="mb-3">
+                    <a href="/admin/cms/page/{{ page.id }}/change/" class="btn btn-sm btn-outline-primary">
+                        <i class="fas fa-edit"></i> Edit Page
+                    </a>
+                </div>
+                {% endif %}
+            </header>
+            
+            <!-- Page Content -->
+            <div class="post-content">
+                {{ page.content|safe }}
+            </div>
+        </article>
+    </div>
+</div>
+{% endblock %}
