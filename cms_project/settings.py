@@ -31,14 +31,14 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'admin_interface',
-    'colorfield',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',  # For API
+    'corsheaders',     # For React frontend
     'cms',
     'accounts',
     'ckeditor',
@@ -49,6 +49,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -158,45 +159,46 @@ LOGIN_URL = 'accounts:login'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
-# Admin Interface Configuration
-X_FRAME_OPTIONS = "SAMEORIGIN"
-SILENCED_SYSTEM_CHECKS = ["security.W019"]
-
-# Admin Interface Theme Settings
-ADMIN_INTERFACE = {
-    'SHOW_THEMES': True,
-    'THEME': 'default',
+# Django REST Framework Configuration
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 20,
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ],
+    'DEFAULT_FILTER_BACKENDS': [
+        'rest_framework.filters.SearchFilter',
+        'rest_framework.filters.OrderingFilter',
+    ],
 }
 
-# AdminLTE3 Configuration
-ADMIN_TOOLS_MENU = 'cms_project.menu.CustomMenu'
-ADMIN_TOOLS_INDEX_DASHBOARD = 'cms_project.dashboard.CustomIndexDashboard'
+# CORS Configuration for React Frontend
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",  # React dev server
+    "http://127.0.0.1:3000",
+    "http://localhost:8080",  # Alternative React port
+    "http://127.0.0.1:8080",
+]
 
-# Admin Interface Configuration
-X_FRAME_OPTIONS = 'SAMEORIGIN'
-SILENCED_SYSTEM_CHECKS = ['security.W019']
+CORS_ALLOW_CREDENTIALS = True
 
-# Admin Interface Theme Configuration
-ADMIN_INTERFACE = {
-    'TITLE': 'Django CMS Admin',
-    'HEADER': 'Django CMS Administration',
-    'COPYRIGHT': '© 2025 Django CMS',
-    'WELCOME_SIGN': 'Welcome to Django CMS Admin',
-    'SEARCH_URL': '/admin/cms/post/',
-    'SHOW_UI_BUILDER': True,
-    'THEME': {
-        'name': 'Bootstrap 5 AdminLTE',
-        'css': '/static/admin/css/adminlte.min.css',
-        'js': '/static/admin/js/adminlte.min.js',
-    },
-    'COLORS': {
-        'primary': '#007bff',
-        'secondary': '#6c757d',
-        'success': '#28a745',
-        'info': '#17a2b8',
-        'warning': '#ffc107',
-        'danger': '#dc3545',
-        'light': '#f8f9fa',
-        'dark': '#343a40',
-    },
-}
+# CORS Headers
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+]

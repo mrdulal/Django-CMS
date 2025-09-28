@@ -18,6 +18,9 @@
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'admin/css/base.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'admin/css/nav_sidebar.css' %}">
@@ -25,7 +28,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/admin-custom.css' %}">
     
     {% block extrastyle %}{% endblock %}
-<style>
+    
     <style>
         :root {
             --primary-color: #007bff;
@@ -338,60 +341,3 @@
     </script>
 </body>
 </html>
-</style>
-{% endblock %}
-
-{% block extrahead %}
-{{ block.super }}
-<meta name="viewport" content="width=device-width, initial-scale=1">
-{% endblock %}
-
-{% block extrajs %}
-{{ block.super }}
-<!-- AdminLTE JS -->
-<script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
-<!-- Chart.js for dashboard charts -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Initialize tooltips
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-        return new bootstrap.Tooltip(tooltipTriggerEl);
-    });
-    
-    // Add loading overlay for form submissions
-    const forms = document.querySelectorAll('form');
-    forms.forEach(form => {
-        form.addEventListener('submit', function() {
-            showLoading();
-        });
-    });
-    
-    // Smooth transitions for hover effects
-    const cards = document.querySelectorAll('.card, .small-box, .info-box');
-    cards.forEach(card => {
-        card.style.transition = 'all 0.3s ease';
-    });
-});
-
-function showLoading() {
-    const overlay = document.createElement('div');
-    overlay.className = 'loading-overlay';
-    overlay.style.display = 'flex';
-    overlay.innerHTML = '<div class="spinner"></div>';
-    document.body.appendChild(overlay);
-}
-
-function hideLoading() {
-    const overlay = document.querySelector('.loading-overlay');
-    if (overlay) {
-        overlay.remove();
-    }
-}
-
-// Auto-hide loading after 5 seconds
-setTimeout(hideLoading, 5000);
-</script>
-{% endblock %}
